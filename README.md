@@ -19,7 +19,7 @@ python manage.py migrate
 ~~ python manage.py loaddata database.json     **json** ~~
 python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin:admin)
 
-
+```
 
 - datos básicos: 
 ```sql
@@ -54,9 +54,6 @@ INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
 commit;
 ```
-
-
-``` 
 - Para correr el proyecto
 ```
 python manage.py runserver
