@@ -16,7 +16,6 @@ pip install -r requirements.txt
  ```
 python manage.py makemigrations
 python manage.py migrate
-~~python manage.py loaddata database.json     **json**~~
 python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin:admin)
 
 ```
