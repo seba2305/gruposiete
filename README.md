@@ -22,7 +22,7 @@ python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin
 
 
 - datos básicos: 
-~~~~sql
+```sql
 INSERT INTO public.app_organismosectorial VALUES (1, 'Servicio de Evaluación Ambiental');
 INSERT INTO public.app_organismosectorial VALUES (2, 'Superintendencia de Electricidad y Combustibles');
 INSERT INTO public.app_organismosectorial VALUES (3, 'Intendencia Regional de Valparaíso');
@@ -53,7 +53,7 @@ INSERT INTO public.app_verificacionmedida VALUES (1, 1, 1);
 INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
 commit;
-~~~~
+```
 
 
 ``` 
