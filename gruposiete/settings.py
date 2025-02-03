@@ -159,7 +159,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated', 
+        #'rest_framework.permissions.IsAuthenticated', 
     ],
 }
 # Configuración del esquema de la API
@@ -167,4 +167,7 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'API de SMA',
     'DESCRIPTION': 'Una API para gestionar planes, medidas y usuarios.',
     'VERSION': '1.0.0',
+    'SCHEMA_PATH_PREFIX': r'/api/',
+    'SCHEMA_PATH_PREFIX_TRIM': False
 }
+

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import action, schema 
+from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
 from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida 
 from .serializers import OrganismoSectorialSerializer, PlanSerializer, MedidaSerializer, VerificacionSerializer, TipoMedidaSerializer
 
@@ -18,26 +21,76 @@ serializer_class = xSerializer #Conecta la vista con el serializer para que los 
 
 
 
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Organismos Sectoriales', summary='Lista Organismos'),
+    retrieve=extend_schema(description='Retorna un Organismo Sectorial', summary='Obtiene uno en particular'),
+    create=extend_schema(description='Crea un Organismo Sectorial',summary='Crear un Organismo'),
+    update=extend_schema(description='Actualiza un Organismo Sectorial',summary='Actualiza un Organismo'),
+    destroy=extend_schema(description='Elimina un Organismo Sectorial',summary='Elimina un Organismo'),
+)
 class OrganismoSectorialViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
+ 
     queryset = OrganismoSectorial.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = OrganismoSectorialSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
+ 
+ 
+    @action(detail=False, methods=['get']) #no es un detalle(o si no seria un listado) y responde a get
+    def sin_medidas_informadas(self,request):
+        return Response(404)
+        #stock_minimo = request.query_params.get('stock_minimo',0)
+        #productos=self.queryset.filter(stock__gte=stock_minimo)
+        #organismos=self.queryset.filter(stock=0)
+        #serializer = self.get_serializer(organismos, many=True) #son varios resultados o solo uno
+        #return Response(serializer.data)
 
-
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Planes', summary='Lista Planes'),
+    retrieve=extend_schema(description='Retorna un Plan', summary='Obtiene uno en particular'),
+    create=extend_schema(description='Crea un Plan',summary='Crear un Plan'),
+    update=extend_schema(description='Actualiza un Plan',summary='Actualiza un Plan'),
+    destroy=extend_schema(description='Elimina un Plan',summary='Elimina un Plan'),
+)
 class PlanViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
     queryset = Plan.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = PlanSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
 
+
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Medidas', summary='Lista Medidas'),
+    retrieve=extend_schema(description='Retorna una Medida', summary='Obtiene una en particular'),
+    create=extend_schema(description='Crea una Medida',summary='Crear una Medida'),
+    update=extend_schema(description='Actualiza una Medida',summary='Actualiza una Medida'),
+    destroy=extend_schema(description='Elimina una Medida',summary='Elimina una Medida'),
+)
 class MedidaViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
     queryset = Medida.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = MedidaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
 
-
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Verificaciones', summary='Lista Verificaciones'),
+    retrieve=extend_schema(description='Retorna una Verificacion', summary='Obtiene una en particular'),
+    create=extend_schema(description='Crea una Verificacion',summary='Crear una Verificacion'),
+    update=extend_schema(description='Actualiza una Verificacion',summary='Actualiza una Verificacion'),
+    destroy=extend_schema(description='Elimina una Verificacion',summary='Elimina una Verificacion'),
+)
 class VerificacionViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
     queryset = Verificacion.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = VerificacionSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
 
 
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Tipos de Medidas', summary='Lista Tipos de Medidas'),
+    retrieve=extend_schema(description='Retorna un Tipo de Medida', summary='Obtiene una en particular'),
+    create=extend_schema(description='Crea un Tipo de Medida',summary='Crea un Tipo de Medida'),
+    update=extend_schema(description='Actualiza un Tipo de Medida',summary='Actualiza un Tipo de Medida'),
+    destroy=extend_schema(description='Elimina un Tipo de Medida',summary='Elimina un Tipo de Medida'),
+)
 class TipoMedidaViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
     queryset = TipoMedida.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = TipoMedidaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
 
