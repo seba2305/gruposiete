@@ -9,7 +9,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
-from api.views import OrganismoSectorialViewSet
+from api.views import OrganismoSectorialViewSet, PlanViewSet, MedidaViewSet, VerificacionViewSet, TipoMedidaViewSet
 
 from django.urls import path, include
 
@@ -32,6 +32,11 @@ combinar con otras en el mismo archivo.
 
 router = DefaultRouter() 
 router.register(r'organismos', OrganismoSectorialViewSet)
+router.register(r'planes', PlanViewSet)
+router.register(r'medidas', MedidaViewSet)
+router.register(r'verificaciones', VerificacionViewSet)
+router.register(r'tipo_medidas', TipoMedidaViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
