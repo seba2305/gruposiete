@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     "app.apps.AppConfig",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -138,13 +139,27 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configurar drf-spectacular
+
+"""
+DEFAULT_PERMISSION_CLASSES: Restringe el acceso a usuarios autenticados. Esto mejora
+la seguridad de la API.
+
+Para que un usuario pueda autenticarse en la API de Django REST Framework (DRF), es
+necesario configurar un sistema de autenticación.
+
+DRF soporta varios métodos de autenticación, pero el más común y sencillo para
+comenzar es el Token Authentication.
+
+"""
+
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', 
     ],
 }
 # Configuración del esquema de la API
