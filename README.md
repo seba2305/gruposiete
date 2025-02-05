@@ -53,12 +53,15 @@ INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
 commit;
 
-ALTER SEQUENCE app_organismosectorial_id_os_seq  RESTART WITH 7;
-ALTER SEQUENCE app_plan_id_plan_seq RESTART WITH 2;
-ALTER SEQUENCE app_tipomedida_id_tipo_medida_seq  RESTART WITH 3;
-ALTER SEQUENCE app_verificacion_id_verificacion_seq RESTART WITH 3;
-ALTER SEQUENCE app_medida_id_medida_seq RESTART WITH 3;
+-- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la soncrIa con la tabla
 
+SELECT SETVAL('app_organismosectorial_id_os_seq', COALESCE(MAX(id_os), 1) ) FROM app_organismosectorial;
+SELECT SETVAL('app_plan_id_plan_seq', COALESCE(MAX(id_plan), 1) ) FROM app_plan;
+SELECT SETVAL('app_tipomedida_id_tipo_medida_seq', COALESCE(MAX(id_tipo_medida), 1) ) FROM app_tipomedida;
+SELECT SETVAL('app_verificacion_id_verificacion_seq', COALESCE(MAX(id_verificacion), 1) ) FROM app_verificacion;
+SELECT SETVAL('app_medida_id_medida_seq', COALESCE(MAX(id_medida), 1) ) FROM app_medida;
+
+ 
 ```
 - Para correr el proyecto
 ```
