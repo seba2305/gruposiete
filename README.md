@@ -53,7 +53,7 @@ INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
 commit;
 
--- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la soncrIa con la tabla
+-- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la sincronIa con la tabla
 
 SELECT SETVAL('app_organismosectorial_id_os_seq', COALESCE(MAX(id_os), 1) ) FROM app_organismosectorial;
 SELECT SETVAL('app_plan_id_plan_seq', COALESCE(MAX(id_plan), 1) ) FROM app_plan;
