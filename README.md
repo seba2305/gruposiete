@@ -52,6 +52,13 @@ INSERT INTO public.app_verificacionmedida VALUES (1, 1, 1);
 INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
 commit;
+
+ALTER SEQUENCE app_organismosectorial_id_os_seq  RESTART WITH 7;
+ALTER SEQUENCE app_plan_id_plan_seq RESTART WITH 2;
+ALTER SEQUENCE app_tipomedida_id_tipo_medida_seq  RESTART WITH 3;
+ALTER SEQUENCE app_verificacion_id_verificacion_seq RESTART WITH 3;
+ALTER SEQUENCE app_medida_id_medida_seq RESTART WITH 3;
+
 ```
 - Para correr el proyecto
 ```
