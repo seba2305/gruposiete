@@ -74,6 +74,16 @@ Una vez ejecutado este código la aplicación puede encontrarse en:
 
 `http://127.0.0.1:8000`
 
+### Documentación de APIs
+
+Se crea Swagger y postman con cada endpoint, hereda descripción de swagger.
+
+Swagger local: http://127.0.0.1:8000/api/docs/
+
+Swagger públicado en internet: https://app.swaggerhub.com/apis-docs/myorganization-834/api-de_sma/1.0.0#/
+
+Postman:  https://www.postman.com/ubicuacl/grupo7
+
 
 #### .pdf referenciales
 ## M4-Class2 - Introducción al framework Django
