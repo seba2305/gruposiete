@@ -1,14 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User  # Importa el modelo User
+from django.utils import timezone
 
  
+class ModeloBase(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
-class TipoMedida(models.Model):
+    class Meta:
+        abstract = True  # Indica que esta clase es abstracta
+
+class TipoMedida(ModeloBase):
     id_tipo_medida = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     def __str__(self):
         return f"{self.nombre}"
 
-class Verificacion(models.Model):
+class Verificacion(ModeloBase):
     id_verificacion = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     verificacion = models.TextField(max_length=2000)
@@ -22,7 +30,7 @@ FRECUENCIA = [
 ('CADA_5_ANIOS', 'Cada 5 años'),
 ]
 
-class Medida(models.Model):
+class Medida(ModeloBase):
     id_medida = models.AutoField(primary_key=True)
     referencia_pda = models.CharField(max_length=100)
     nombre_corto = models.CharField(max_length=100) 
@@ -42,14 +50,14 @@ class VerificacionMedida(models.Model):
     id_verificacion = models.ForeignKey('Verificacion', models.CASCADE, db_column='id_verificacion')
     id_medida = models.ForeignKey('Medida', models.CASCADE, db_column='id_medida')
 
-class OrganismoSectorial(models.Model):
+class OrganismoSectorial(ModeloBase):
     id_os = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     
     def __str__(self):
         return f"{self.nombre}"
     
-class Plan(models.Model):
+class Plan(ModeloBase):
     id_plan = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     inicio = models.DateTimeField(null=True)
@@ -63,3 +71,18 @@ class Plan(models.Model):
 class OrganismoPlan(models.Model):
     id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os')
     id_plan = models.ForeignKey('Plan', models.CASCADE, db_column='id_plan')
+
+
+ESTADO_VERIFICACION = [
+('VERIFICACION_PENDIENTE', 'Verificación pendiente'),
+('VERIFICADA', 'Verificada'),
+('RECHAZADA', 'Rechazada'),
+]
+class MedidaReportada(ModeloBase):
+    id_medida_reportada = models.AutoField(primary_key=True)
+    id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os', help_text="Id del Organismo Sectorial que está informando.")
+    id_medida = models.ForeignKey('Medida', models.CASCADE, db_column='id_medida', help_text="Id de la medida a resportar.")
+    id_usuario = models.ForeignKey(User, models.CASCADE, help_text="Id Usuario de django.")
+    valor = models.TextField(max_length=50, help_text="Resultado de la medida aplicada.")  
+    estado = models.CharField(max_length=30, choices=ESTADO_VERIFICACION, default='VERIFICACION_PENDIENTE')
+    

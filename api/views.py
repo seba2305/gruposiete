@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action, schema 
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
-from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida 
-from .serializers import OrganismoSectorialSerializer, PlanSerializer, MedidaSerializer, VerificacionSerializer, TipoMedidaSerializer
+from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida , MedidaReportada
+from .serializers import OrganismoSectorialSerializer, PlanSerializer, MedidaSerializer, VerificacionSerializer, TipoMedidaSerializer, MedidaReportadaSerializer
 
 # Create your views here.
 
@@ -93,6 +93,24 @@ class TipoMedidaViewSet(viewsets.ModelViewSet):
     http_method_names = ['post','put','get','delete']
     queryset = TipoMedida.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = TipoMedidaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
+
+
+
+
+@extend_schema_view(
+    list=extend_schema(description='Retorna un listado de Medidas reportadas', summary='Lista Medidas Reportadas'),
+    retrieve=extend_schema(description='Retorna una Medida Reportada', summary='Obtiene una en particular'),
+    create=extend_schema(description='Permite crear un nuevo registro en la tabal de medidas reportadas',summary='Registra una medida aplicada'),
+    update=extend_schema(description='Actualiza una Medida Reportada',summary='Actualiza una Medida Reportada'),
+    destroy=extend_schema(description='Elimina una Medida Reportada',summary='Elimina una Medida Reportada'),
+)
+
+
+class MedidaReportadaViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post','put','get','delete']
+    queryset = MedidaReportada.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
+    serializer_class = MedidaReportadaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
+
 
 
 

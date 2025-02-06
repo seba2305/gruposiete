@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TipoMedida, Medida, VerificacionMedida, Verificacion, Plan, OrganismoPlan, OrganismoSectorial
+from .models import TipoMedida, Medida, VerificacionMedida, Verificacion, Plan, OrganismoPlan, OrganismoSectorial, MedidaReportada
 
 @admin.register(OrganismoSectorial)
 class OrganismoSectorialAdmin(admin.ModelAdmin):
@@ -38,4 +38,9 @@ class OrganismoPlanAdmin(admin.ModelAdmin):
 class VerificacionMedidaAdmin(admin.ModelAdmin):
     list_display = ('id_medida', 'id_verificacion')
     search_fields = ('id_medida', 'id_verificacion')
+
+@admin.register(MedidaReportada)
+class MedidaReportadaAdmin(admin.ModelAdmin):
+    list_display = ('created_at', 'updated_at', 'id_medida', 'valor','id_os','estado')
+    search_fields = ('id_medida', 'id_os')
 

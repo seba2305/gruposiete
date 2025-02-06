@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida 
+from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida , MedidaReportada
 
 
 class OrganismoSectorialSerializer(serializers.ModelSerializer):
@@ -26,6 +26,12 @@ class TipoMedidaSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoMedida
         fields = '__all__' #cada campo que queremos vaya en el serialozador 
+
+class MedidaReportadaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MedidaReportada
+        fields = '__all__' #cada campo que queremos vaya en el serialozador 
+
 
 
 
