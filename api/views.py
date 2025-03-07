@@ -6,6 +6,11 @@ from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiPara
 from app.models import OrganismoSectorial, OrganismoPlan, Plan, VerificacionMedida, Medida, Verificacion, TipoMedida , MedidaReportada
 from .serializers import OrganismoSectorialSerializer, PlanSerializer, MedidaSerializer, VerificacionSerializer, TipoMedidaSerializer, MedidaReportadaSerializer
 
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from .permissions import IsOrganizacionSectorial, IsOrganizacionSectorialOrAdmin  # Importa el permiso personalizado
+
+
 # Create your views here.
 
 """
@@ -29,6 +34,8 @@ serializer_class = xSerializer #Conecta la vista con el serializer para que los 
     destroy=extend_schema(description='Elimina un Organismo Sectorial',summary='Elimina un Organismo'),
 )
 class OrganismoSectorialViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminUser]
     http_method_names = ['post','put','get','delete']
  
     queryset = OrganismoSectorial.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
@@ -52,6 +59,8 @@ class OrganismoSectorialViewSet(viewsets.ModelViewSet):
     destroy=extend_schema(description='Elimina un Plan',summary='Elimina un Plan'),
 )
 class PlanViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminUser]
     http_method_names = ['post','put','get','delete']
     queryset = Plan.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = PlanSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
@@ -65,6 +74,8 @@ class PlanViewSet(viewsets.ModelViewSet):
     destroy=extend_schema(description='Elimina una Medida',summary='Elimina una Medida'),
 )
 class MedidaViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminUser]
     http_method_names = ['post','put','get','delete']
     queryset = Medida.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = MedidaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
@@ -77,6 +88,8 @@ class MedidaViewSet(viewsets.ModelViewSet):
     destroy=extend_schema(description='Elimina una Verificacion',summary='Elimina una Verificacion'),
 )
 class VerificacionViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminUser]
     http_method_names = ['post','put','get','delete']
     queryset = Verificacion.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = VerificacionSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
@@ -90,6 +103,8 @@ class VerificacionViewSet(viewsets.ModelViewSet):
     destroy=extend_schema(description='Elimina un Tipo de Medida',summary='Elimina un Tipo de Medida'),
 )
 class TipoMedidaViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminUser]
     http_method_names = ['post','put','get','delete']
     queryset = TipoMedida.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = TipoMedidaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
@@ -107,6 +122,8 @@ class TipoMedidaViewSet(viewsets.ModelViewSet):
 
 
 class MedidaReportadaViewSet(viewsets.ModelViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    permission_classes = [IsOrganizacionSectorialOrAdmin]
     http_method_names = ['post','put','get','delete']
     queryset = MedidaReportada.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
     serializer_class = MedidaReportadaSerializer #Conecta la vista con el serializer para que los datos se transformen correctamente a JSON y viceversa.
