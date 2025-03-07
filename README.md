@@ -22,24 +22,26 @@ python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin
 
 - datos básicos: 
 ```sql
-INSERT INTO public.app_organismosectorial VALUES (1, 'Servicio de Evaluación Ambiental');
-INSERT INTO public.app_organismosectorial VALUES (2, 'Superintendencia de Electricidad y Combustibles');
-INSERT INTO public.app_organismosectorial VALUES (3, 'Intendencia Regional de Valparaíso');
-INSERT INTO public.app_organismosectorial VALUES (4, 'Dirección General del Territorio Marítimo y de Marina Mercante');
-INSERT INTO public.app_organismosectorial VALUES (5, 'Corporación Nacional Forestal');
-INSERT INTO public.app_organismosectorial VALUES (6, 'Servicio Agrícola y Ganadero');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (1, 'Servicio de Evaluación Ambiental');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (2, 'Superintendencia de Electricidad y Combustibles');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (3, 'Intendencia Regional de Valparaíso');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (4, 'Dirección General del Territorio Marítimo y de Marina Mercante');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (5, 'Corporación Nacional Forestal');
+INSERT INTO public.app_organismosectorial(id_os, nombre) VALUES (6, 'Servicio Agrícola y Ganadero');
 
-INSERT INTO public.app_plan VALUES (1, 'PLAN DE PREVENCIÓN Y DESCONTAMINACIÓN ATMOSFÉRICA PARA LAS COMUNAS DE CONCÓN, QUINTERO Y PUCHUNCAVÍ', '2025-01-30 18:14:24-03', '2025-12-31 18:14:36-03', '0 %');
+INSERT INTO public.app_plan (id_plan, nombre,inicio,termino,estado_avance) VALUES (1, 'PLAN DE PREVENCIÓN Y DESCONTAMINACIÓN ATMOSFÉRICA PARA LAS COMUNAS DE CONCÓN, QUINTERO Y PUCHUNCAVÍ', '2025-01-30 18:14:24-03', '2025-12-31 18:14:36-03', '0 %');
 
-INSERT INTO public.app_tipomedida VALUES (1, 'Medida regulatoria');
-INSERT INTO public.app_tipomedida VALUES (2, 'Medida no regulatoria');
+INSERT INTO public.app_tipomedida(id_tipo_medida, nombre) VALUES (1, 'Medida regulatoria');
+INSERT INTO public.app_tipomedida(id_tipo_medida, nombre) VALUES (2, 'Medida no regulatoria');
 
-INSERT INTO public.app_verificacion VALUES (1, 'RCA aprobadas', 'Registro de las RCA aprobadas identificando el titular, la RCA, las emisiones y el monto a compensar');
-INSERT INTO public.app_verificacion VALUES (2, 'Cumple art 33 SEC', 'Oficialización de la instrucción de SEC para cumplir con el sistema indicado en el artículo 33 del plan');
+INSERT INTO public.app_verificacion(id_verificacion, nombre, verificacion) VALUES (1, 'RCA aprobadas', 'Registro de las RCA aprobadas identificando el titular, la RCA, las emisiones y el monto a compensar');
 
 
-INSERT INTO public.app_medida VALUES (1, '42,43,44', 'RCA que contenga obligación de compensar emisiones', 'Número de RCA aprobadas en el año t que contengan obligaciones de compensar emisiones atmosféricas', 'Suma del número de RCA aprobadas que contengan obligaciones de compensar emisiones atmosféricas', 'ANUAL', 'numeric', 1, 1, 2);
-INSERT INTO public.app_medida VALUES (2, '33,37', 'Requisito del sistema de almacenamiento intermedio', 'Instrucciones de SEC para cumplir con el sistema de almacenamiento intermedio u otro con el mismo objetivo, conforme al artículo 5 de DS n°160/2008', 'Si/No', 'UNICA', 'string', 2, 1, 1);
+INSERT INTO public.app_verificacion(id_verificacion, nombre, verificacion) VALUES (2, 'Cumple art 33 SEC', 'Oficialización de la instrucción de SEC para cumplir con el sistema indicado en el artículo 33 del plan');
+
+
+INSERT INTO public.app_medida(id_medida, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, id_os, id_plan, id_tipo_medida ) VALUES (1, '42,43,44', 'RCA que contenga obligación de compensar emisiones', 'Número de RCA aprobadas en el año t que contengan obligaciones de compensar emisiones atmosféricas', 'Suma del número de RCA aprobadas que contengan obligaciones de compensar emisiones atmosféricas', 'ANUAL', 'numeric', 1, 1, 2);
+INSERT INTO public.app_medida(id_medida, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, id_os, id_plan, id_tipo_medida ) VALUES (2, '33,37', 'Requisito del sistema de almacenamiento intermedio', 'Instrucciones de SEC para cumplir con el sistema de almacenamiento intermedio u otro con el mismo objetivo, conforme al artículo 5 de DS n°160/2008', 'Si/No', 'UNICA', 'string', 2, 1, 1);
 
 INSERT INTO public.app_organismoplan VALUES (1, 1, 1);
 INSERT INTO public.app_organismoplan VALUES (2, 2, 1);
