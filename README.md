@@ -76,6 +76,19 @@ Una vez ejecutado este código la aplicación puede encontrarse en:
 
 `http://127.0.0.1:8000`
 
+Para probar si efectivamente funciona o no el token , crear usuario por active admin, luego generar el token
+
+En Postman hacer lo siguiente: 
+1. Abrir Postman.
+2. Seleccionar el método HTTP (GET, POST, etc.).
+3. Ingresar la URL de la API, por ejemplo:
+   http://127.0.0.1:8000/sma/organismos/
+4. En la pestaña "Headers", agregar:
+   Key: Authorization
+   Value: Token TU_TOKEN_AQUI
+   (Ejemplo: Token 123456789abcdef123456789abcdef)
+5. Presionar "Send" y verificar la respuesta.
+
 ### Documentación de APIs
 
 Se crea Swagger y postman con cada endpoint, hereda descripción de swagger.
