@@ -74,7 +74,7 @@ python manage.py runserver
 
 Una vez ejecutado este código la aplicación puede encontrarse en:
 
-`http://127.0.0.1:8000`
+`http://127.0.0.1:8000/sma/` o `http://127.0.0.1:8000/api/`
 
 Para probar si efectivamente funciona o no el token , crear usuario por active admin, luego generar el token
 
