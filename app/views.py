@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import OrganismoSectorial, Plan, Medida, TipoMedida, Verificacion
+from .models import OrganismoSectorial, Plan, Medida, TipoMedida, Verificacion, MedidaReportada
 from django.db import transaction
 
 # Lista de cursos con paginación
@@ -13,9 +13,14 @@ def organismos(request):
 
 # Detalle de un curso
 def detalle_organismo(request, id_os):
-    organismo= get_object_or_404(OrganismoSectorial, id_os=id_os)
+    medidas_reportadas = MedidaReportada.objects.filter(id_os_id=id_os)
+
+    print(f"ID del organismo recibido: {id_os}")
+    print(f"Cantidad de medidas reportadas encontradas: {medidas_reportadas.count()}")
+    for medida in medidas_reportadas:
+        print(f"Medida ID: {medida.id_medida_id}, Valor: {medida.valor}, Estado: {medida.estado}")
 
     return render(request, 'detalle_organismo.html', {
-        'organismo': organismo,
+        'medidas_reportadas': medidas_reportadas,
     })
 
