@@ -1,11 +1,48 @@
 from django.db import models
 from django.contrib.auth.models import User  # Importa el modelo User
-from django.utils import timezone
+from crum import get_current_user
 
- 
 class ModeloBase(models.Model):
+    """
+    Clase base abstracta que añade campos de auditoría para registros.
+    
+    Campos:
+    - created_at: Fecha y hora de creación del registro
+    - updated_at: Fecha y hora de la última actualización
+    - created_by: Usuario que creó el registro
+    - updated_by: Usuario que realizó la última modificación
+    
+    Utiliza la librería 'crum' para obtener el usuario actual de forma automática.
+    """
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    
+    # Campo para el usuario que creó el registro
+    created_by = models.ForeignKey(
+        User, 
+        on_delete=models.PROTECT, 
+        related_name='%(class)s_created',
+        null=True,
+        blank=True
+    )
+    
+    # Campo para el usuario que modificó el registro por última vez
+    updated_by = models.ForeignKey(
+        User, 
+        on_delete=models.PROTECT, 
+        related_name='%(class)s_updated',
+        null=True,
+        blank=True
+    )
+
+    def save(self, *args, **kwargs):
+        user = get_current_user()
+        if user and not user.pk:
+            user = None
+        if not self.pk:
+            self.created_by = user
+            self.updated_by = user
+        super(ModeloBase, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True  # Indica que esta clase es abstracta
