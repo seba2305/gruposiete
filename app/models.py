@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User  # Importa el modelo User
 from crum import get_current_user
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 class ModeloBase(models.Model):
     """
@@ -18,8 +19,7 @@ class ModeloBase(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
     
     # Campo para el usuario que creó el registro
-    created_by = models.ForeignKey(
-        User, 
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, 
         on_delete=models.PROTECT, 
         related_name='%(class)s_created',
         null=True,
@@ -27,8 +27,7 @@ class ModeloBase(models.Model):
     )
     
     # Campo para el usuario que modificó el registro por última vez
-    updated_by = models.ForeignKey(
-        User, 
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, 
         on_delete=models.PROTECT, 
         related_name='%(class)s_updated',
         null=True,
@@ -119,7 +118,15 @@ class MedidaReportada(ModeloBase):
     id_medida_reportada = models.AutoField(primary_key=True)
     id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os', help_text="Id del Organismo Sectorial que está informando.")
     id_medida = models.ForeignKey('Medida', models.CASCADE, db_column='id_medida', help_text="Id de la medida a resportar.")
-    id_usuario = models.ForeignKey(User, models.CASCADE, help_text="Id Usuario de django.")
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, help_text="Id Usuario de django.")
     valor = models.TextField(max_length=50, help_text="Resultado de la medida aplicada.")  
     estado = models.CharField(max_length=30, choices=ESTADO_VERIFICACION, default='VERIFICACION_PENDIENTE')
-    
+
+class CustomUser(AbstractUser):
+    organismo_sectorial = models.ForeignKey(
+        OrganismoSectorial,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='usuarios'
+    )

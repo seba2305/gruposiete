@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TipoMedida, Medida, VerificacionMedida, Verificacion, Plan, OrganismoPlan, OrganismoSectorial, MedidaReportada
-
+from .models import TipoMedida, Medida, VerificacionMedida, Verificacion, Plan, OrganismoPlan, OrganismoSectorial, MedidaReportada, CustomUser
+from django.contrib.auth.admin import UserAdmin
 @admin.register(OrganismoSectorial)
 class OrganismoSectorialAdmin(admin.ModelAdmin):
     list_display = ('id_os', 'nombre')
@@ -44,3 +44,20 @@ class MedidaReportadaAdmin(admin.ModelAdmin):
     list_display = ('created_at', 'updated_at', 'id_medida', 'valor','id_os','estado')
     search_fields = ('id_medida', 'id_os')
 
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+
+    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'organismo_sectorial']
+
+    fieldsets = UserAdmin.fieldsets + (
+        ('Campos personalizados', {
+            'fields': ('organismo_sectorial',),
+        }),
+    )
+
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Campos personalizados', {
+            'fields': ('organismo_sectorial',),
+        }),
+    )
