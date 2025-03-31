@@ -47,13 +47,11 @@ class ModeloBase(models.Model):
         abstract = True  # Indica que esta clase es abstracta
 
 class TipoMedida(ModeloBase):
-    id_tipo_medida = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     def __str__(self):
         return f"{self.nombre}"
 
 class Verificacion(ModeloBase):
-    id_verificacion = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     verificacion = models.TextField(max_length=2000)
     
@@ -67,34 +65,31 @@ FRECUENCIA = [
 ]
 
 class Medida(ModeloBase):
-    id_medida = models.AutoField(primary_key=True)
     referencia_pda = models.CharField(max_length=100)
     nombre_corto = models.CharField(max_length=100) 
     indicador = models.TextField(max_length=2000) 
     formula_de_calculo = models.TextField(max_length=2000) 
     frecuencia_reporte = models.CharField(max_length=30, choices=FRECUENCIA, default='ANUAL')
     tipo_de_dato_a_validar = models.CharField(max_length=100, blank=True, null=True) 
-    id_tipo_medida = models.ForeignKey('TipoMedida', models.CASCADE, db_column='id_tipo_medida')
-    id_plan = models.ForeignKey('Plan', models.CASCADE, db_column='id_plan')
-    id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os')
+    tipo_medida = models.ForeignKey('TipoMedida', models.CASCADE)
+    plan = models.ForeignKey('Plan', models.CASCADE)
+    organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE)
     verificaciones = models.ManyToManyField(Verificacion, through='VerificacionMedida')
 
     def __str__(self):
         return f"{self.nombre_corto} - {self.frecuencia_reporte}"
     
 class VerificacionMedida(models.Model):
-    id_verificacion = models.ForeignKey('Verificacion', models.CASCADE, db_column='id_verificacion')
-    id_medida = models.ForeignKey('Medida', models.CASCADE, db_column='id_medida')
+    verificacion = models.ForeignKey('Verificacion', models.CASCADE)
+    medida = models.ForeignKey('Medida', models.CASCADE)
 
 class OrganismoSectorial(ModeloBase):
-    id_os = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     
     def __str__(self):
         return f"{self.nombre}"
     
 class Plan(ModeloBase):
-    id_plan = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
     inicio = models.DateTimeField(null=True)
     termino = models.DateTimeField(null=True)
@@ -102,11 +97,11 @@ class Plan(ModeloBase):
     organismos = models.ManyToManyField(OrganismoSectorial, through='OrganismoPlan')
    
     def __str__(self):
-        return f"{self.id_plan} - {self.nombre}"
+        return f"{self.nombre}"
     
 class OrganismoPlan(models.Model):
-    id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os')
-    id_plan = models.ForeignKey('Plan', models.CASCADE, db_column='id_plan')
+    organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE)
+    plan = models.ForeignKey('Plan', models.CASCADE)
 
 
 ESTADO_VERIFICACION = [
@@ -115,10 +110,9 @@ ESTADO_VERIFICACION = [
 ('RECHAZADA', 'Rechazada'),
 ]
 class MedidaReportada(ModeloBase):
-    id_medida_reportada = models.AutoField(primary_key=True)
-    id_os = models.ForeignKey('OrganismoSectorial', models.CASCADE, db_column='id_os', help_text="Id del Organismo Sectorial que está informando.")
-    id_medida = models.ForeignKey('Medida', models.CASCADE, db_column='id_medida', help_text="Id de la medida a resportar.")
-    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, help_text="Id Usuario de django.")
+    organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE, help_text="Id del Organismo Sectorial que está informando.")
+    medida = models.ForeignKey('Medida', models.CASCADE, help_text="Id de la medida a resportar.")
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, help_text="Id Usuario de django.")
     valor = models.TextField(max_length=50, help_text="Resultado de la medida aplicada.")  
     estado = models.CharField(max_length=30, choices=ESTADO_VERIFICACION, default='VERIFICACION_PENDIENTE')
 
