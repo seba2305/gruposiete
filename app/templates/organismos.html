@@ -12,12 +12,12 @@
         </tr>
     </thead>
     <tbody>
-        {% if organismo %}
+        {% if page_obj %}
         {% for organismo in page_obj %}
         <tr>
-            <td>{{ organismo.id_os }}</td>
+            <td>{{ organismo.id }}</td>
             <td>{{ organismo.nombre }}</td>
-            <td><a href="{% url 'detalle_organismo' organismo.id_os %}" class="btn btn-primary">Ver Detalles</a></td>
+            <td><a href="{% url 'detalle_organismo' organismo.id %}" class="btn btn-primary">Ver Detalles</a></td>
         </tr>
         {% endfor %}        
         {% endif %}

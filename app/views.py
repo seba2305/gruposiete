@@ -13,12 +13,12 @@ def organismos(request):
 
 # Detalle de un curso
 def detalle_organismo(request, id_os):
-    medidas_reportadas = MedidaReportada.objects.filter(id_os_id=id_os)
+    medidas_reportadas = MedidaReportada.objects.filter(organismo_sectorial_id=id_os)
 
     print(f"ID del organismo recibido: {id_os}")
     print(f"Cantidad de medidas reportadas encontradas: {medidas_reportadas.count()}")
     for medida in medidas_reportadas:
-        print(f"Medida ID: {medida.id_medida_id}, Valor: {medida.valor}, Estado: {medida.estado}")
+        print(f"Medida ID: {medida.id}, Valor: {medida.valor}, Estado: {medida.estado}")
 
     return render(request, 'detalle_organismo.html', {
         'medidas_reportadas': medidas_reportadas,
