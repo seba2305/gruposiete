@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import TipoMedida, Medida, VerificacionMedida, Verificacion, Plan, OrganismoPlan, OrganismoSectorial, MedidaReportada, CustomUser
 from django.contrib.auth.admin import UserAdmin
+
 @admin.register(OrganismoSectorial)
 class OrganismoSectorialAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')
@@ -31,7 +32,7 @@ class PlanAdmin(admin.ModelAdmin):
 
 @admin.register(OrganismoPlan)
 class OrganismoPlanAdmin(admin.ModelAdmin):
-    list_display = ('id', 'organismo_sectorial')
+    list_display = ('id', 'organismo_sectorial','plan')
     search_fields = ('plan', 'organismo_sectorial')
 
 @admin.register(VerificacionMedida)

@@ -14,6 +14,7 @@ pip install -r requirements.txt
 
 
  ```
+pip install django-crum  (porfa pasar esto a los requirements.txt)
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin:admin)
@@ -53,15 +54,21 @@ INSERT INTO public.app_organismoplan VALUES (6, 6, 1);
 INSERT INTO public.app_verificacionmedida VALUES (1, 1, 1);
 INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
+INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
+
+INSERT INTO public.auth_group ("name") VALUES ('organizacion_sectorial');
+
 commit;
 
 -- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la sincronIa con la tabla
 
-SELECT SETVAL('app_organismosectorial_organismo_sectorial_id_seq', COALESCE(MAX(organismo_sectorial_id), 1) ) FROM app_organismosectorial;
-SELECT SETVAL('app_plan_plan_id_seq', COALESCE(MAX(plan_id), 1) ) FROM app_plan;
-SELECT SETVAL('app_tipomedida_tipo_medida_id_seq', COALESCE(MAX(tipo_medida_id), 1) ) FROM app_tipomedida;
-SELECT SETVAL('app_verificacion_verificacion_id_seq', COALESCE(MAX(verificacion_id), 1) ) FROM app_verificacion;
-SELECT SETVAL('app_medida_medida_id_seq', COALESCE(MAX(medida_id), 1) ) FROM app_medida;
+SELECT SETVAL('app_organismosectorial_id_seq', COALESCE(MAX(id), 1) ) FROM app_organismosectorial;
+SELECT SETVAL('app_plan_id_seq', COALESCE(MAX(id), 1) ) FROM app_plan;
+SELECT SETVAL('app_tipomedida_id_seq', COALESCE(MAX(id), 1) ) FROM app_tipomedida;
+SELECT SETVAL('app_verificacion_id_seq', COALESCE(MAX(id), 1) ) FROM app_verificacion;
+SELECT SETVAL('app_medida_id_seq', COALESCE(MAX(id), 1) ) FROM app_medida;
+
+
 
  
 ```
@@ -75,6 +82,10 @@ python manage.py runserver
 Una vez ejecutado este código la aplicación puede encontrarse en:
 
 `http://127.0.0.1:8000/sma/` o `http://127.0.0.1:8000/api/`
+
+Al grupo organizacion_sectorial, se le debe asignar los permisos: 
+- App | medida reportada | Can add medida reportada
+- App | medida reportada | Can view medida reportada
 
 Para probar si efectivamente funciona o no el token , crear usuario por active admin, luego generar el token
 
@@ -97,7 +108,7 @@ Swagger local: http://127.0.0.1:8000/api/docs/
 
 Swagger públicado en internet: https://app.swaggerhub.com/apis-docs/myorganization-834/api-de_sma/1.0.0#/
 
-Postman:  https://www.postman.com/ubicuacl/grupo7
+Postman:  https://www.postman.com/ubicuacl/grupo7   (reemplazar por su token en API de SMA ->Variables -> apiKey )
 
 
 #### .pdf referenciales

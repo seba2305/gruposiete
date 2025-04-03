@@ -48,15 +48,28 @@ class ModeloBase(models.Model):
 
 class TipoMedida(ModeloBase):
     nombre = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Tipo de medida'
+        verbose_name_plural = 'Tipos de medidas'
+
     def __str__(self):
         return f"{self.nombre}"
 
 class Verificacion(ModeloBase):
     nombre = models.CharField(max_length=100, blank=True, null=True)
     verificacion = models.TextField(max_length=2000)
-    
+
+    class Meta:
+        verbose_name = 'Verificación'
+        verbose_name_plural = 'Verificaciones'
+
     def __str__(self):
         return f"{self.nombre} - {self.verificacion}"
+    
+
+    
+    
 
 FRECUENCIA = [
 ('ANUAL', 'Anual'),
@@ -76,6 +89,10 @@ class Medida(ModeloBase):
     organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE)
     verificaciones = models.ManyToManyField(Verificacion, through='VerificacionMedida')
 
+    class Meta:
+        verbose_name = 'Medida'
+        verbose_name_plural = 'Medidas'
+
     def __str__(self):
         return f"{self.nombre_corto} - {self.frecuencia_reporte}"
     
@@ -83,8 +100,16 @@ class VerificacionMedida(models.Model):
     verificacion = models.ForeignKey('Verificacion', models.CASCADE)
     medida = models.ForeignKey('Medida', models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Relación Verificación - medida'
+        verbose_name_plural = 'Relación Verificación - medida'
+
 class OrganismoSectorial(ModeloBase):
     nombre = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Organismo Sectorial'
+        verbose_name_plural = 'Organismos Sectoriales'
     
     def __str__(self):
         return f"{self.nombre}"
@@ -95,6 +120,10 @@ class Plan(ModeloBase):
     termino = models.DateTimeField(null=True)
     estado_avance = models.CharField(max_length=255, blank=True, null=True)
     organismos = models.ManyToManyField(OrganismoSectorial, through='OrganismoPlan')
+
+    class Meta:
+        verbose_name = 'Plan'
+        verbose_name_plural = 'Planes'
    
     def __str__(self):
         return f"{self.nombre}"
@@ -102,6 +131,13 @@ class Plan(ModeloBase):
 class OrganismoPlan(models.Model):
     organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE)
     plan = models.ForeignKey('Plan', models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Relación Organismo - Plan'
+        verbose_name_plural = 'Relación Organismo - Plan'
+    
+    def __str__(self):
+        return f"{self.organismo_sectorial} - {self.plan}"
 
 
 ESTADO_VERIFICACION = [
@@ -112,7 +148,6 @@ ESTADO_VERIFICACION = [
 class MedidaReportada(ModeloBase):
     organismo_sectorial = models.ForeignKey('OrganismoSectorial', models.CASCADE, help_text="Id del Organismo Sectorial que está informando.")
     medida = models.ForeignKey('Medida', models.CASCADE, help_text="Id de la medida a resportar.")
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, help_text="Id Usuario de django.")
     valor = models.TextField(max_length=50, help_text="Resultado de la medida aplicada.")  
     estado = models.CharField(max_length=30, choices=ESTADO_VERIFICACION, default='VERIFICACION_PENDIENTE')
 
@@ -124,3 +159,7 @@ class CustomUser(AbstractUser):
         blank=True,
         related_name='usuarios'
     )
+
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
