@@ -132,10 +132,9 @@
       - [Postman](https://www.postman.com/ubicuacl/grupo7) (reemplazar por su token en API de SMA ->Variables -> apiKey )
 
    - Por otro lado, para poder acceder a la documentación en la cual se baso este proyecto, puede acceder a los siguientes enlaces:
-
-      - [Documento-Presentacion-cliente](https://github.com/mayerlynyrs/gruposiete/pdf/1-Presentacion-cliente.pdf)
-      - [PPDA-Ejemplos-reporte](https://github.com/mayerlynyrs/gruposiete/pdf/2-PPDA-ejemplos-reporte.pdf)
-      - [Instrucciones-MMA-reporte-Diario-Oficial](https://github.com/mayerlynyrs/gruposiete/pdf/3-200820-Dicta-Instrucciones-MMA.pdf)
+      - [Documento-Presentacion-cliente](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/1-Presentacion-cliente.pdf)
+      - [PPDA-Ejemplos-reporte](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/2-PPDA-ejemplos-reporte.pdf)
+      - [Instrucciones-MMA-reporte-Diario-Oficial](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/3-200820-Dicta-Instrucciones-MMA.pdf)
 
    ## Autores
 
