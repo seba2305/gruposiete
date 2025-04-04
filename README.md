@@ -1,146 +1,147 @@
-# GRUPO7
+# Proyecto API SMA (GRUPO7)
+   Este es un proyecto realizado en el curso "Desarrollo Aplicaciones Back-End Python-TalentoFuturo", el cual busca cubrir la necesidad de registrar y reportar medidas de avance de los diferentes PPDA por parte de los organismos sectoriales.
 
-```
-git clone https://github.com/mayerlynyrs/gruposiete.git
-cd gruposiete
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
+   #### Tecnologías utilizadas
+   Las tecnologías utilizadas en este proyecto fueron las siguientes:
+      
+      - Lenguaje: Python
+      - Base de Datos: PostgreSQL
+      - Framework: Django
+      - Versionamiento: GIT
+      - Gestión del proyecto: Taiga
 
-#### Creación de la base de datos
+   
 
-- Crear la base de datos (nombre de la base de datos `grupo7`)
+   ## Clonado e Instalación del proyecto
 
+   - Para comenzar con la preparación e instalación del proyecto, debera ejecutar los siguiente comandos en la maquina en la cual se desplegará:
 
- ```
-pip install django-crum  (porfa pasar esto a los requirements.txt)
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser (por facilidad y sólo para uso local,uso admin:admin)
+   ```bash
+   # Clonamos el repositorio
+   git clone https://github.com/mayerlynyrs/gruposiete.git
+   # Acceder a la carpeta
+   cd gruposiete
+   # Crear y activar entorno virtual
+   python -m venv .venv
+   # Linux/Mac
+   source venv/bin/activate
+   # Windows
+   .venv\Scripts\activate
+   # instalacion de librerias
+   pip install -r requirements.txt
+   ```
 
-```
+   ## Creación de la base de datos y ejecución de migraciones
 
-- datos básicos: 
-```sql
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (1, 'Servicio de Evaluación Ambiental');
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (2, 'Superintendencia de Electricidad y Combustibles');
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (3, 'Intendencia Regional de Valparaíso');
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (4, 'Dirección General del Territorio Marítimo y de Marina Mercante');
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (5, 'Corporación Nacional Forestal');
-INSERT INTO public.app_organismosectorial(id, nombre) VALUES (6, 'Servicio Agrícola y Ganadero');
+   - Crear la base de datos (nombre de la base de datos `grupo7`) en PostgreSQL.
+   - En caso de ser necesario, deberá editar el archivo ".env", para setear el usuario y password de la Base de Datos.
+   - Luego ejecutar los siguientes comandos:
 
-INSERT INTO public.app_plan (id, nombre,inicio,termino,estado_avance) VALUES (1, 'PLAN DE PREVENCIÓN Y DESCONTAMINACIÓN ATMOSFÉRICA PARA LAS COMUNAS DE CONCÓN, QUINTERO Y PUCHUNCAVÍ', '2025-01-30 18:14:24-03', '2025-12-31 18:14:36-03', '0 %');
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   python manage.py createsuperuser 
+   # por facilidad y sólo para uso local
+   # utilizar: 
+   #     admin:admin
+   ```
 
-INSERT INTO public.app_tipomedida(id, nombre) VALUES (1, 'Medida regulatoria');
-INSERT INTO public.app_tipomedida(id, nombre) VALUES (2, 'Medida no regulatoria');
+   - Datos básicos: 
+   ```sql
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (1, 'Servicio de Evaluación Ambiental');
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (2, 'Superintendencia de Electricidad y Combustibles');
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (3, 'Intendencia Regional de Valparaíso');
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (4, 'Dirección General del Territorio Marítimo y de Marina Mercante');
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (5, 'Corporación Nacional Forestal');
+   INSERT INTO public.app_organismosectorial(id, nombre) VALUES (6, 'Servicio Agrícola y Ganadero');
 
-INSERT INTO public.app_verificacion(id, nombre, verificacion) VALUES (1, 'RCA aprobadas', 'Registro de las RCA aprobadas identificando el titular, la RCA, las emisiones y el monto a compensar');
+   INSERT INTO public.app_plan (id, nombre,inicio,termino,estado_avance) VALUES (1, 'PLAN DE PREVENCIÓN Y DESCONTAMINACIÓN ATMOSFÉRICA PARA LAS COMUNAS DE CONCÓN, QUINTERO Y PUCHUNCAVÍ', '2025-01-30 18:14:24-03', '2025-12-31 18:14:36-03', '0 %');
 
+   INSERT INTO public.app_tipomedida(id, nombre) VALUES (1, 'Medida regulatoria');
+   INSERT INTO public.app_tipomedida(id, nombre) VALUES (2, 'Medida no regulatoria');
 
-INSERT INTO public.app_verificacion(id, nombre, verificacion) VALUES (2, 'Cumple art 33 SEC', 'Oficialización de la instrucción de SEC para cumplir con el sistema indicado en el artículo 33 del plan');
-
-
-INSERT INTO public.app_medida(id, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, organismo_sectorial_id, plan_id, tipo_medida_id ) VALUES (1, '42,43,44', 'RCA que contenga obligación de compensar emisiones', 'Número de RCA aprobadas en el año t que contengan obligaciones de compensar emisiones atmosféricas', 'Suma del número de RCA aprobadas que contengan obligaciones de compensar emisiones atmosféricas', 'ANUAL', 'numeric', 1, 1, 2);
-INSERT INTO public.app_medida(id, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, organismo_sectorial_id, plan_id, tipo_medida_id ) VALUES (2, '33,37', 'Requisito del sistema de almacenamiento intermedio', 'Instrucciones de SEC para cumplir con el sistema de almacenamiento intermedio u otro con el mismo objetivo, conforme al artículo 5 de DS n°160/2008', 'Si/No', 'UNICA', 'string', 2, 1, 1);
-
-INSERT INTO public.app_organismoplan VALUES (1, 1, 1);
-INSERT INTO public.app_organismoplan VALUES (2, 2, 1);
-INSERT INTO public.app_organismoplan VALUES (3, 3, 1);
-INSERT INTO public.app_organismoplan VALUES (4, 4, 1);
-INSERT INTO public.app_organismoplan VALUES (5, 5, 1);
-INSERT INTO public.app_organismoplan VALUES (6, 6, 1);
-
-INSERT INTO public.app_verificacionmedida VALUES (1, 1, 1);
-INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
-
-INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
-
-INSERT INTO public.auth_group ("name") VALUES ('organizacion_sectorial');
-
-commit;
-
--- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la sincronIa con la tabla
-
-SELECT SETVAL('app_organismosectorial_id_seq', COALESCE(MAX(id), 1) ) FROM app_organismosectorial;
-SELECT SETVAL('app_plan_id_seq', COALESCE(MAX(id), 1) ) FROM app_plan;
-SELECT SETVAL('app_tipomedida_id_seq', COALESCE(MAX(id), 1) ) FROM app_tipomedida;
-SELECT SETVAL('app_verificacion_id_seq', COALESCE(MAX(id), 1) ) FROM app_verificacion;
-SELECT SETVAL('app_medida_id_seq', COALESCE(MAX(id), 1) ) FROM app_medida;
+   INSERT INTO public.app_verificacion(id, nombre, verificacion) VALUES (1, 'RCA aprobadas', 'Registro de las RCA aprobadas identificando el titular, la RCA, las emisiones y el monto a compensar');
 
 
-
- 
-```
-- Para correr el proyecto
-```
-python manage.py runserver
-```
-
-### Ejecución
-
-Una vez ejecutado este código la aplicación puede encontrarse en:
-
-`http://127.0.0.1:8000/sma/` o `http://127.0.0.1:8000/api/`
-
-Al grupo organizacion_sectorial, se le debe asignar los permisos: 
-- App | medida reportada | Can add medida reportada
-- App | medida reportada | Can view medida reportada
-
-Para probar si efectivamente funciona o no el token , crear usuario por active admin, luego generar el token
-
-En Postman hacer lo siguiente: 
-1. Abrir Postman.
-2. Seleccionar el método HTTP (GET, POST, etc.).
-3. Ingresar la URL de la API, por ejemplo:
-   http://127.0.0.1:8000/sma/organismos/
-4. En la pestaña "Headers", agregar:
-   Key: Authorization
-   Value: Token TU_TOKEN_AQUI
-   (Ejemplo: Token 123456789abcdef123456789abcdef)
-5. Presionar "Send" y verificar la respuesta.
-
-### Documentación de APIs
-
-Se crea Swagger y postman con cada endpoint, hereda descripción de swagger.
-
-Swagger local: http://127.0.0.1:8000/api/docs/
-
-Swagger públicado en internet: https://app.swaggerhub.com/apis-docs/myorganization-834/api-de_sma/1.0.0#/
-
-Postman:  https://www.postman.com/ubicuacl/grupo7   (reemplazar por su token en API de SMA ->Variables -> apiKey )
+   INSERT INTO public.app_verificacion(id, nombre, verificacion) VALUES (2, 'Cumple art 33 SEC', 'Oficialización de la instrucción de SEC para cumplir con el sistema indicado en el artículo 33 del plan');
 
 
-#### .pdf referenciales
-## M4-Class2 - Introducción al framework Django
-○ Paso 1: Crear y activar el entorno virtual:
-`python -m venv venv`
-`source venv/bin/activate` # Linux/Mac
-`venv\Scripts\activate` # Windows
+   INSERT INTO public.app_medida(id, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, organismo_sectorial_id, plan_id, tipo_medida_id ) VALUES (1, '42,43,44', 'RCA que contenga obligación de compensar emisiones', 'Número de RCA aprobadas en el año t que contengan obligaciones de compensar emisiones atmosféricas', 'Suma del número de RCA aprobadas que contengan obligaciones de compensar emisiones atmosféricas', 'ANUAL', 'numeric', 1, 1, 2);
+   INSERT INTO public.app_medida(id, referencia_pda, nombre_corto ,indicador,formula_de_calculo, frecuencia_reporte , tipo_de_dato_a_validar, organismo_sectorial_id, plan_id, tipo_medida_id ) VALUES (2, '33,37', 'Requisito del sistema de almacenamiento intermedio', 'Instrucciones de SEC para cumplir con el sistema de almacenamiento intermedio u otro con el mismo objetivo, conforme al artículo 5 de DS n°160/2008', 'Si/No', 'UNICA', 'string', 2, 1, 1);
 
-○ Paso 2: Instalar Django
-`pip install django`
+   INSERT INTO public.app_organismoplan VALUES (1, 1, 1);
+   INSERT INTO public.app_organismoplan VALUES (2, 2, 1);
+   INSERT INTO public.app_organismoplan VALUES (3, 3, 1);
+   INSERT INTO public.app_organismoplan VALUES (4, 4, 1);
+   INSERT INTO public.app_organismoplan VALUES (5, 5, 1);
+   INSERT INTO public.app_organismoplan VALUES (6, 6, 1);
 
-○ Paso 3: Crear un proyecto
-`django-admin startproject gruposiete`
+   INSERT INTO public.app_verificacionmedida VALUES (1, 1, 1);
+   INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
-○ Paso 4: Ejecutar el servidor
-`python manage.py runserver`
+   INSERT INTO public.app_verificacionmedida VALUES (2, 2, 2);
 
-Crea una aplicación dentro del Proyecto
-`python manage.py startapp myapp`
+   INSERT INTO public.auth_group ("name") VALUES ('organizacion_sectorial');
 
-## M4-Class4 - Django Rest Framework
-<!-- Extendiendo la API -->
-Genera un token para este usuario
-`python manage.py drf_create_token <username>`
+   commit;
 
-## M4-Class6 - Construyendo una API en DRF
-Configurar drf-spectacular
-Paso 1. Instalación: `pip install drf-spectacular`
+   -- esto resetea las secuencias, ya que al insertar directamente el valor de una pk, pierde la sincronia con la tabla
 
-## M5-Class3 - Acceso a Datos con SQL Nativo en Python
-Instalación
->> `pip install psycopg2`
-ó en caso de no tener pg_config instalado
->> `pip install psycopg2-binary`
+   SELECT SETVAL('app_organismosectorial_id_seq', COALESCE(MAX(id), 1) ) FROM app_organismosectorial;
+   SELECT SETVAL('app_plan_id_seq', COALESCE(MAX(id), 1) ) FROM app_plan;
+   SELECT SETVAL('app_tipomedida_id_seq', COALESCE(MAX(id), 1) ) FROM app_tipomedida;
+   SELECT SETVAL('app_verificacion_id_seq', COALESCE(MAX(id), 1) ) FROM app_verificacion;
+   SELECT SETVAL('app_medida_id_seq', COALESCE(MAX(id), 1) ) FROM app_medida;
+   ```
+
+   ## Ejecución del proyecto
+   - Para ejecutar el proyecto se deben ejecutar desde la carpeta de instalación, los siguientes comandos:
+      ```bash
+      python manage.py runserver
+      ```
+
+   - Una vez ejecutado este código la aplicación puede encontrarse en:
+
+      `http://127.0.0.1:8000/sma/` o `http://127.0.0.1:8000/api/`
+
+   - Desde el Admin de Django al grupo organizacion_sectorial, se le deben asignar los siguientes permisos: 
+      - App | medida reportada | Can add medida reportada
+      - App | medida reportada | Can view medida reportada
+
+   - Para probar si efectivamente si funciona o no el token , crear usuario por active admin, luego generar el token.
+
+   - Luego en Postman seguir los pasos a continuación: 
+      1. Abrir Postman.
+      2. Seleccionar el método HTTP (GET, POST, etc.).
+      3. Ingresar la URL de la API, por ejemplo:
+         http://127.0.0.1:8000/sma/organismos/
+      4. En la pestaña "Headers", agregar:
+         - Key: Authorization
+         - Value: Token [AQUI_VA_EL_TOKEN]
+         (Ejemplo: Token 123456789abcdef123456789abcdef)
+      5. Presionar "Send" y verificar la respuesta.
+
+   ## Documentación
+
+   - La documentación acerca de los endpoints fue generada con Swagger. Para acceder a ésta, la podemos encontrar en distintas fuentes:
+
+      - [Swagger local](http://127.0.0.1:8000/api/docs/) (debe estar corriendo el proyecto)
+
+      - [Swagger públicado en internet](https://app.swaggerhub.com/apis-docs/myorganization-834/api-de_sma/1.0.0#/)
+
+      - [Postman](https://www.postman.com/ubicuacl/grupo7) (reemplazar por su token en API de SMA ->Variables -> apiKey )
+
+   - Por otro lado, para poder acceder a la documentación en la cual se baso este proyecto, puede acceder a los siguientes enlaces:
+
+      - [Documento-Presentacion-cliente](https://github.com/mayerlynyrs/gruposiete/pdf/1-Presentacion-cliente.pdf)
+      - [PPDA-Ejemplos-reporte](https://github.com/mayerlynyrs/gruposiete/pdf/2-PPDA-ejemplos-reporte.pdf)
+      - [Instrucciones-MMA-reporte-Diario-Oficial](https://github.com/mayerlynyrs/gruposiete/pdf/3-200820-Dicta-Instrucciones-MMA.pdf)
+
+   ## Autores
+
+   - [@mayerlynyrs](https://www.github.com/mayerlynyrs)
+   - [@puribe](https://www.github.com/puribe)
+   - [@bianelbianchini](https://github.com/bianelbianchini)
+   - [@eltan-ing](https://github.com/eltan-ing)
+   - [@seba2305](https://github.com/seba2305)
+
