@@ -1,0 +1,277 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "organizacion_sectorial",
+      "permissions": [
+        45,
+        48
+      ]
+    }
+  },
+  {
+    "model": "auth.group_permissions",
+    "pk": 1,
+    "fields": {
+      "group": 1,
+      "permission": 48
+    }
+  },
+  {
+    "model": "auth.group_permissions",
+    "pk": 2,
+    "fields": {
+      "group": 1,
+      "permission": 45
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 1,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Servicio de Evaluación Ambiental"
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 2,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Superintendencia de Electricidad y Combustibles"
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 3,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Intendencia Regional de Valparaíso"
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 4,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Dirección General del Territorio Marítimo y de Marina Mercante"
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 5,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Corporación Nacional Forestal"
+    }
+  },
+  {
+    "model": "app.organismosectorial",
+    "pk": 6,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Servicio Agrícola y Ganadero"
+    }
+  },
+  {
+    "model": "app.plan",
+    "pk": 1,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "PLAN DE PREVENCIÓN Y DESCONTAMINACIÓN ATMOSFÉRICA PARA LAS COMUNAS DE CONCÓN, QUINTERO Y PUCHUNCAVÍ",
+      "inicio": "2025-01-30T21:14:24Z",
+      "termino": "2025-12-31T21:14:36Z",
+      "estado_avance": "0 %"
+    }
+  },
+  {
+    "model": "app.tipomedida",
+    "pk": 1,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Medida regulatoria"
+    }
+  },
+  {
+    "model": "app.tipomedida",
+    "pk": 2,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Medida no regulatoria"
+    }
+  },
+  {
+    "model": "app.verificacion",
+    "pk": 1,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "RCA aprobadas",
+      "verificacion": "Registro de las RCA aprobadas identificando el titular, la RCA, las emisiones y el monto a compensar"
+    }
+  },
+  {
+    "model": "app.verificacion",
+    "pk": 2,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "nombre": "Cumple art 33 SEC",
+      "verificacion": "Oficialización de la instrucción de SEC para cumplir con el sistema indicado en el artículo 33 del plan"
+    }
+  },
+  {
+    "model": "app.medida",
+    "pk": 1,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "referencia_pda": "42,43,44",
+      "nombre_corto": "RCA que contenga obligación de compensar emisiones",
+      "indicador": "Número de RCA aprobadas en el año t que contengan obligaciones de compensar emisiones atmosféricas",
+      "formula_de_calculo": "Suma del número de RCA aprobadas que contengan obligaciones de compensar emisiones atmosféricas",
+      "frecuencia_reporte": "ANUAL",
+      "tipo_de_dato_a_validar": "numeric",
+      "tipo_medida": 2,
+      "plan": 1,
+      "organismo_sectorial": 1
+    }
+  },
+  {
+    "model": "app.medida",
+    "pk": 2,
+    "fields": {
+      "created_at": null,
+      "updated_at": null,
+      "created_by": null,
+      "updated_by": null,
+      "referencia_pda": "33,37",
+      "nombre_corto": "Requisito del sistema de almacenamiento intermedio",
+      "indicador": "Instrucciones de SEC para cumplir con el sistema de almacenamiento intermedio u otro con el mismo objetivo, conforme al artículo 5 de DS n°160/2008",
+      "formula_de_calculo": "Si/No",
+      "frecuencia_reporte": "UNICA",
+      "tipo_de_dato_a_validar": "string",
+      "tipo_medida": 1,
+      "plan": 1,
+      "organismo_sectorial": 2
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 1,
+    "fields": {
+      "organismo_sectorial": 1,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 2,
+    "fields": {
+      "organismo_sectorial": 2,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 3,
+    "fields": {
+      "organismo_sectorial": 3,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 4,
+    "fields": {
+      "organismo_sectorial": 4,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 5,
+    "fields": {
+      "organismo_sectorial": 5,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.organismoplan",
+    "pk": 6,
+    "fields": {
+      "organismo_sectorial": 6,
+      "plan": 1
+    }
+  },
+  {
+    "model": "app.verificacionmedida",
+    "pk": 1,
+    "fields": {
+      "verificacion": 1,
+      "medida": 1
+    }
+  },
+  {
+    "model": "app.verificacionmedida",
+    "pk": 2,
+    "fields": {
+      "verificacion": 2,
+      "medida": 2
+    }
+  },
+  {
+    "model": "app.customuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$QMDiGbSz4zetxMA7rSemoA$+Pkd1EvktmNgUEUxEEH58F16qkBHsVxbV5/rhSWspsM=",
+      "last_login": "2025-04-04T14:54:34.592Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-04-04T14:54:00.675Z",
+      "organismo_sectorial": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+  ]
+  
