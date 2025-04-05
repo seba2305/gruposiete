@@ -34,39 +34,60 @@
    ## Creación de la base de datos y ejecución de migraciones
 
    - Crear la base de datos (nombre de la base de datos `grupo7`) en PostgreSQL.
-   - En caso de ser necesario, deberá editar el archivo ".env", para setear el usuario y password de la Base de Datos.
+   - Crear (ya que no es parte del repositorio) el archivo ".env", para setear credenciales de acceso a la Base de Datos.
+
+   El archivo .env debe situarse al mismo nivel del archivo manager.py y su estructura es la siguiente:
+
+   ```bash
+   SECRET_KEY = 'django-insecure-=)=&ii#5%w_#y+ad$b@_^^apm-szd=4njfuxpwz@+*m=9g=kkk'
+   # Base de Datos
+   NAME = 'grupo7'
+   USER = ''
+   PASSWORD = ''
+   HOST = 'localhost'
+   PORT = 5432
+
+    # las variables se establecen según las credenciales locales de cada uno.
+   ```
+  
+
    - Luego ejecutar los siguientes comandos:
 
    ```bash
    python manage.py migrate
    python manage.py loaddata database.json
-   # por facilidad y sólo para uso local
-   # utilizar:
+   # el archivo database.json incluye la creación del usuario administrador
+   # por facilidad y sólo para uso local las credenciales son :
    # Username: admin
    # Password: admin
    ```
 
    ## Ejecución del proyecto
-   - Para ejecutar el proyecto se deben ejecutar desde la carpeta de instalación, los siguientes comandos:
+   - Para correr el proyecto, se debe ejecutar desde la carpeta de instalación, el siguiente comando:
       ```bash
       python manage.py runserver
       ```
 
-   - Una vez ejecutado este código la aplicación puede encontrarse en:
+   - Una vez realizado el paso anterior, la aplicación se ejecutará en:
 
-      `http://127.0.0.1:8000/sma/` o `http://127.0.0.1:8000/api/`
+      `http://127.0.0.1:8000/admin/` y `http://127.0.0.1:8000/api/`
 
-   - Para probar si efectivamente si funciona o no el token , crear usuario por active admin, luego generar el token.
+   - Para probar el api, ingrese al panel de administracion:
+
+     Ir a tokens y copiar el del usuario admin (para poder ejecutar todos los endpoints). 
+     Cada vez que se crea un usuario, el sistema le asigna automáticamente un token. 
 
    - Luego en Postman seguir los pasos a continuación: 
       1. Abrir Postman.
       2. Seleccionar el método HTTP (GET, POST, etc.).
       3. Ingresar la URL de la API, por ejemplo:
-         http://127.0.0.1:8000/sma/organismos/
-      4. En la pestaña "Headers", agregar:
+         http://127.0.0.1:8000/api/organismos/
+      4. En la pestaña "Authorization", agregar:
+         - Auth Type: API Key
          - Key: Authorization
          - Value: Token [AQUI_VA_EL_TOKEN]
          (Ejemplo: Token 123456789abcdef123456789abcdef)
+         - Add to: Header
       5. Presionar "Send" y verificar la respuesta.
 
    ## Documentación

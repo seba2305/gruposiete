@@ -14,7 +14,10 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+# Forzar la recarga del archivo .env
+load_dotenv(override=True)
+dotenv_path = os.path.join(os.getcwd(), '.env')
+print(f"Ruta al archivo .env: {dotenv_path}")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,6 +97,8 @@ DATABASES = {
     }
 }
 
+
+ 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
