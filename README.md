@@ -92,7 +92,8 @@
 
    ## Documentación
 
-   - La documentación acerca de los endpoints fue generada con Swagger. Para acceder a ésta, la podemos encontrar en distintas fuentes:
+   - [Diagrama Modelo de Datos](documentation/img/modelo_datos_v1.1.jpg)
+   - La documentación de los endpoints fue generada con Swagger. Para acceder a ésta, la podemos encontrar en distintas fuentes:
 
       - [Swagger local](http://127.0.0.1:8000/api/docs/) (debe estar corriendo el proyecto)
 
@@ -100,10 +101,11 @@
 
       - [Postman](https://www.postman.com/ubicuacl/grupo7) (reemplazar por su token en API de SMA ->Variables -> apiKey )
 
-   - Por otro lado, para poder acceder a la documentación en la cual se baso este proyecto, puede acceder a los siguientes enlaces:
-      - [Documento-Presentacion-cliente](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/1-Presentacion-cliente.pdf)
-      - [PPDA-Ejemplos-reporte](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/2-PPDA-ejemplos-reporte.pdf)
-      - [Instrucciones-MMA-reporte-Diario-Oficial](https://github.com/mayerlynyrs/gruposiete/blob/main/pdf/3-200820-Dicta-Instrucciones-MMA.pdf)
+   - Para acceder a la documentación en la cual se baso este proyecto, puede acceder a los siguientes enlaces:
+      - [Documento-Presentacion-cliente](documentation/pdf/1-Presentacion-cliente.pdf)
+      - [PPDA-Ejemplos-reporte](documentation/pdf/2-PPDA-ejemplos-reporte.pdf)
+      - [Instrucciones-MMA-reporte-Diario-Oficial](documentation/pdf/3-200820-Dicta-Instrucciones-MMA.pdf)
+
 
    ## Autores
 
