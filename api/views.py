@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action, schema 
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
@@ -35,7 +35,7 @@ serializer_class = xSerializer #Conecta la vista con el serializer para que los 
 )
 class OrganismoSectorialViewSet(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
     http_method_names = ['post','put','get','delete']
  
     queryset = OrganismoSectorial.objects.all() # Define qué datos se manejarán en los endpoints. Se incluyen todos en este caso
@@ -44,7 +44,7 @@ class OrganismoSectorialViewSet(viewsets.ModelViewSet):
  
     @action(detail=False, methods=['get']) #no es un detalle(o si no seria un listado) y responde a get
     def sin_medidas_informadas(self,request):
-        return Response(404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
         #stock_minimo = request.query_params.get('stock_minimo',0)
         #productos=self.queryset.filter(stock__gte=stock_minimo)
         #organismos=self.queryset.filter(stock=0)
