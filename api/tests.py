@@ -5,7 +5,7 @@ from rest_framework import status
 from django.contrib.auth.models import Group
 from app.models import (
     OrganismoSectorial, Plan, TipoMedida,
-    Medida, Verificacion, MedidaReportada
+    Medida, Verificacion, MedidaReportada, OrganismoPlan
 )
 
 User = get_user_model()
@@ -120,7 +120,7 @@ def test_create_medida(admin_client):
     plan = Plan.objects.create(nombre="Plan X", inicio="2025-01-01", termino="2025-12-31")
     tipo = TipoMedida.objects.create(nombre="Volumen")
     org = OrganismoSectorial.objects.create(nombre="SAG")
-
+    OrganismoPlan.objects.create(plan=plan, organismo_sectorial=org)
     data = {
         "referencia_pda": "M-001",
         "nombre_corto": "Medida X",
