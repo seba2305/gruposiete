@@ -88,7 +88,8 @@ WSGI_APPLICATION = 'gruposiete.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -100,16 +101,9 @@ DATABASES = {
         "OPTIONS": {
             "sslmode": "require",
         },
-    }
+        "DISABLE_SERVER_SIDE_CURSORS": True,
+    }
 }
-
- 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # Password validation
