@@ -130,6 +130,7 @@ def test_reportar_medida(usuario_y_organismo):
     )
 
     medida_reportada = MedidaReportada.objects.create(
+        user,
         organismo_sectorial=organismo,
         medida=medida,
         valor="101",
